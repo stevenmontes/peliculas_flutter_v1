@@ -99,10 +99,9 @@ class PeliculaDetalle extends StatelessWidget {
 
   Widget _descripcion(Pelicula pelicula) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
+      padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
       child: Text(
         pelicula.overview ?? 'Sin descripción',
-        textAlign: TextAlign.justify,
       ),
     );
   }
@@ -125,8 +124,8 @@ class PeliculaDetalle extends StatelessWidget {
   Widget _crearActoresPageView(List<Actor> actores) {
     return SizedBox(
       height: 200.0,
-      child: PageView.builder(
-        pageSnapping: false,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
         controller: PageController(viewportFraction: 0.3, initialPage: 1),
         itemCount: actores.length,
         itemBuilder: (context, i) => _actorTarjeta(actores[i]),
@@ -136,22 +135,26 @@ class PeliculaDetalle extends StatelessWidget {
 
   Widget _actorTarjeta(Actor actor) {
     return Container(
+        margin: EdgeInsets.only(left: 15),
         child: Column(
-      children: <Widget>[
-        ClipRRect(
-          borderRadius: BorderRadius.circular(20.0),
-          child: FadeInImage(
-            image: NetworkImage(actor.getFoto()),
-            placeholder: AssetImage('assets/img/no-image.jpg'),
-            height: 150.0,
-            fit: BoxFit.cover,
-          ),
-        ),
-        Text(
-          actor.name ?? 'Sin actor',
-          overflow: TextOverflow.ellipsis,
-        )
-      ],
-    ));
+          children: <Widget>[
+            ClipRRect(
+              borderRadius: BorderRadius.circular(20.0),
+              child: FadeInImage(
+                image: NetworkImage(actor.getFoto()),
+                placeholder: AssetImage('assets/img/no-image.jpg'),
+                height: 150.0,
+                fit: BoxFit.cover,
+              ),
+            ),
+            Container(
+              width: 120,
+              child: Text(
+                actor.name ?? 'Sin actor',
+                overflow: TextOverflow.ellipsis,
+              ),
+            )
+          ],
+        ));
   }
 }
