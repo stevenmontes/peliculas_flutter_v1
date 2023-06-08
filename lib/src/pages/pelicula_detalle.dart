@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 
 import 'package:peliculas/src/models/actores_model.dart';
@@ -39,9 +40,19 @@ class PeliculaDetalle extends StatelessWidget {
       pinned: true,
       flexibleSpace: FlexibleSpaceBar(
         centerTitle: true,
-        title: Text(
-          pelicula.title ?? 'Sin titulo',
-          style: TextStyle(color: Colors.white, fontSize: 16.0),
+        title: FadeIn(
+          delay: Duration(milliseconds: 300),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: Text(
+              pelicula.title ?? 'Sin titulo',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 16.0,
+              ),
+            ),
+          ),
         ),
         background: Hero(
           tag: pelicula.uniqueIdBanner,
@@ -76,18 +87,27 @@ class PeliculaDetalle extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text(pelicula.title ?? 'Sin titulo',
-                    style: Theme.of(context).textTheme.titleMedium,
-                    overflow: TextOverflow.ellipsis),
-                Text(pelicula.originalTitle ?? 'Sin titulo',
-                    style: Theme.of(context).textTheme.titleMedium,
-                    overflow: TextOverflow.ellipsis),
-                Row(
-                  children: <Widget>[
-                    Icon(Icons.star_border),
-                    Text(pelicula.voteAverage.toString(),
-                        style: Theme.of(context).textTheme.titleMedium)
-                  ],
+                FadeIn(
+                  delay: Duration(milliseconds: 200),
+                  child: Text(pelicula.title ?? 'Sin titulo',
+                      style: Theme.of(context).textTheme.titleMedium,
+                      overflow: TextOverflow.ellipsis),
+                ),
+                FadeIn(
+                  delay: Duration(milliseconds: 400),
+                  child: Text(pelicula.originalTitle ?? 'Sin titulo',
+                      style: Theme.of(context).textTheme.titleMedium,
+                      overflow: TextOverflow.ellipsis),
+                ),
+                FadeIn(
+                  delay: Duration(milliseconds: 600),
+                  child: Row(
+                    children: <Widget>[
+                      Icon(Icons.star_border),
+                      Text(pelicula.voteAverage.toString(),
+                          style: Theme.of(context).textTheme.titleMedium)
+                    ],
+                  ),
                 )
               ],
             ),
