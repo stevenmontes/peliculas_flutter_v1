@@ -43,11 +43,14 @@ class PeliculaDetalle extends StatelessWidget {
           pelicula.title ?? 'Sin titulo',
           style: TextStyle(color: Colors.white, fontSize: 16.0),
         ),
-        background: FadeInImage(
-          image: NetworkImage(pelicula.getBackgroundImg()),
-          placeholder: AssetImage('assets/img/loading.gif'),
-          fadeInDuration: Duration(microseconds: 150),
-          fit: BoxFit.cover,
+        background: Hero(
+          tag: pelicula.uniqueIdBanner,
+          child: FadeInImage(
+            image: NetworkImage(pelicula.getBackgroundImg()),
+            placeholder: AssetImage('assets/img/loading.gif'),
+            fadeInDuration: Duration(microseconds: 150),
+            fit: BoxFit.cover,
+          ),
         ),
       ),
     );

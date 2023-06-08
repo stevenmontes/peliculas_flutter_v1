@@ -28,10 +28,16 @@ class _MoviePosterImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FadeInImage(
-      image: NetworkImage(pelicula.getPosterImg()),
-      placeholder: AssetImage('assets/img/no-image.jpg'),
-      fit: BoxFit.cover,
+    return GestureDetector(
+      onTap: () => Navigator.pushNamed(context, 'detalle', arguments: pelicula),
+      child: Hero(
+        tag: pelicula.uniqueIdBanner,
+        child: FadeInImage(
+          image: NetworkImage(pelicula.getBackgroundImg()),
+          placeholder: AssetImage('assets/img/loading.gif'),
+          fit: BoxFit.cover,
+        ),
+      ),
     );
   }
 }
